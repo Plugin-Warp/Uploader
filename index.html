@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UploadWarp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ff5722;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background-color: #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UploadWarp</h1>
+        <input type="file" id="fileInput" accept=".js">
+        <input type="password" id="patInput" placeholder="Enter Access Token">
+        <button onclick="uploadFile()">Upload</button>
+        <p id="status"></p>
+    </div>
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById("fileInput");
+            const patInput = document.getElementById("patInput");
+            const status = document.getElementById("status");
+            
+            if (!fileInput.files.length || !patInput.value) {
+                status.textContent = "Please select a file and enter your access token.";
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = async () => {
+                const content = btoa(reader.result);
+                const filename = file.name;
+                const repo = "Plugin-warp/Plugin-warp.github.io";
+                const path = `extension/${filename}`;
+                const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+                
+                try {
+                    const response = await fetch(apiUrl, {
+                        headers: { Authorization: `token ${patInput.value}` }
+                    });
+                    const data = response.ok ? await response.json() : null;
+                    const sha = data ? data.sha : null;
+                    
+                    const payload = {
+                        message: `Upload ${filename}`,
+                        content,
+                        branch: "main",
+                        ...(sha && { sha })
+                    };
+                    
+                    const uploadResponse = await fetch(apiUrl, {
+                        method: "PUT",
+                        headers: {
+                            Authorization: `token ${patInput.value}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(payload),
+                    });
+                    
+                    if (uploadResponse.ok) {
+                        status.textContent = "File uploaded successfully.";
+                    } else {
+                        status.textContent = "Upload failed. Check your token and permissions.";
+                    }
+                } catch (error) {
+                    status.textContent = "An error occurred.";
+                }
+            };
+        }
+    </script>
+</body>
+</html>
