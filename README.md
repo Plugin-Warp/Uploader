@@ -1,12 +1,12 @@
 # Uploadwarp
 
-Uploadwarp is a web-based tool that allows extension developers to upload their JavaScript extensions to Pluginwarp. It provides an easy way to upload `.js` files directly to the `extension` folder of the repository using a GitHub Personal Access Token (PAT).
+Uploadwarp is a web-based tool that allows extension developers to upload their JavaScript extensions to Pluginwarp. It provides an easy way to upload `.js` files directly to the extensions folder of the repository using a GitHub Personal Access Token (PAT).
 
 ## Features
 
 - Simple web interface for uploading JavaScript files
 - Requires Access Token for authentication
-- Automatically commits files to the `extension` folder
+- Automatically commits files to the extensions folder
 - Supports overwriting existing files
 - Secure file upload process
 
@@ -14,7 +14,7 @@ Uploadwarp is a web-based tool that allows extension developers to upload their 
 
 1. Open the **UploadWarp** web page.
 2. Select your JavaScript extension file (`.js`).
-3. Enter your \*\*Access Token\*\*.
+3. Enter your **Access Token**.
 4. Click **Upload**.
 5. Your extension will be uploaded to the PluginWarp repository.
 
