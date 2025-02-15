@@ -1,6 +1,6 @@
-# Uploadwarp
+# WarpLoad
 
-Uploadwarp is a web-based tool that allows extension developers to upload their Turbowarp extensions to Pluginwarp. It provides an easy way to upload `.js` files directly to the extensions folder of the repository using a Access Token.
+WarpLoad is a web-based tool that allows extension developers to upload their WarpCore extensions to Impact. It provides an easy way to upload `.js` files directly to the extensions folder of the repository using a Access Token.
 
 ## Features
 
@@ -12,11 +12,11 @@ Uploadwarp is a web-based tool that allows extension developers to upload their 
 
 ## How to Use
 
-1. Open the **UploadWarp** web page.
+1. Open the **WarpLoad** web page.
 2. Select your JavaScript extension file (`.js`).
 3. Enter your **Access Token**.
 4. Click **Upload**.
-5. Your extension will be uploaded to the PluginWarp repository.
+5. Your extension will be uploaded to the Impact repository.
 
 ## Notes
 
@@ -25,9 +25,6 @@ Uploadwarp is a web-based tool that allows extension developers to upload their 
 
 ## Contributing
 
-If you have suggestions or want to improve UploadWarp, feel free to contribute by submitting issues or pull requests.
+If you have suggestions or want to improve WarpLoad, feel free to contribute by submitting issues or pull requests.
 
-## License
-
-This project follows the license of PluginWarp. Refer to the repository for details.
 
