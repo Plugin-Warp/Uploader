@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UploadWarp!</title>
+    <title>WarpLoad!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,7 +40,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>UploadWarp</h1>
+        <h1>WarpLoad</h1>
         <input type="file" id="fileInput" accept=".js">
         <input type="password" id="patInput" placeholder="Enter Access Token">
         <button onclick="uploadFile()">Upload</button>
@@ -63,7 +63,7 @@
             reader.onload = async () => {
                 const content = btoa(reader.result);
                 const filename = file.name;
-                const repo = "Plugin-warp/Plugin-warp.github.io";
+                const repo = "Warp-Core-PW/Impact";
                 const path = `extensions/${filename}`;
                 const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
                 
