@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WarpLoad!</title>
+    <title>WarpLoad</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,6 +41,8 @@
 <body>
     <div class="container">
         <h1>WarpLoad</h1>
+        <h2>Upload Extensions to Impact!</h2>
+        <input type="text" id="usernameInput" placeholder="Enter Username">
         <input type="file" id="fileInput" accept=".js">
         <input type="password" id="patInput" placeholder="Enter Access Token">
         <button onclick="uploadFile()">Upload</button>
@@ -48,15 +50,17 @@
     </div>
     <script>
         async function uploadFile() {
+            const usernameInput = document.getElementById("usernameInput");
             const fileInput = document.getElementById("fileInput");
             const patInput = document.getElementById("patInput");
             const status = document.getElementById("status");
             
-            if (!fileInput.files.length || !patInput.value) {
-                status.textContent = "Please select a file and enter your access token.";
+            if (!usernameInput.value || !fileInput.files.length || !patInput.value) {
+                status.textContent = "Please enter a username, select a file, and enter your access token.";
                 return;
             }
             
+            const username = usernameInput.value;
             const file = fileInput.files[0];
             const reader = new FileReader();
             reader.readAsText(file);
@@ -64,7 +68,7 @@
                 const content = btoa(reader.result);
                 const filename = file.name;
                 const repo = "Warp-Core-PW/Impact";
-                const path = `extensions/${filename}`;
+                const path = `extensions/${username}/${filename}`;
                 const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
                 
                 try {
@@ -75,7 +79,7 @@
                     const sha = data ? data.sha : null;
                     
                     const payload = {
-                        message: `Upload ${filename}`,
+                        message: `Upload ${filename} for ${username}`,
                         content,
                         branch: "main",
                         ...(sha && { sha })
